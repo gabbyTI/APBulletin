@@ -1,6 +1,5 @@
 <?php
   // This file maintains all basic functions
-
   function mysql_prep( $value ){
   $magic_quotes_active = get_magic_quotes_gpc();
   $new_enough_php = function_exists("mysql_real_escape_string"); // i.e PHP>=V4.3.0

@@ -58,6 +58,30 @@
             <h2><?php echo htmlentities($sel_page["menu_name"]); ?></h2>
             <div class = "page-content">
               <?php // echo  strip_tags(nl2br($sel_page["content"]), "<b><br><p><a><hr><i><u><h1><h2><h3><h4><h5><h6><center>" ) ;?>
+              <?php 
+                //echo strip_tags(nl2br($sel_page["content"]), "<b><br><p><a><hr><i><u><h1><h2><h3><h4><h5><h6><center>");
+                function get_img($public = true){
+                  global $connection;
+                  $sql = "SELECT * FROM pages WHERE id = {$_GET['page']}";
+                  $result = mysql_query($sql);
+                  confirm_query($result);
+                  return($result);
+                } 
+
+                $result = get_img();
+                if($result){
+                  while ($row = mysql_fetch_array($result)) {
+                    $pics = $row['7'];
+                  }
+                }
+
+                if(empty($pics)){
+                  echo "<img src='' alt='No image' style='float: left; max-width:150px; height:200px; padding-right:15px;'>";
+                }else{ 
+                  echo "<img src='".$pics."' style='float: left; max-width:150px; height:200px; padding-right:15px;'>";
+                }
+                echo $sel_page["content"];
+              ?>
               <?php echo  $sel_page["content"] ;?>
             </div>
             <br/>

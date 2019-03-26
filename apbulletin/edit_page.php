@@ -82,6 +82,34 @@
         // Using function to list he fields that had errore
         if (!empty($errors)) { display_errors($errors); }
         ?>
+        <?php 
+                //echo strip_tags(nl2br($sel_page["content"]), "<b><br><p><a><hr><i><u><h1><h2><h3><h4><h5><h6><center>");
+                function get_img($public = true){
+                  global $connection;
+                  $sql = "SELECT * FROM pages WHERE id = {$_GET['page']}";
+                  $result = mysql_query($sql);
+                  confirm_query($result);
+                  return($result);
+                } 
+
+                $result = get_img();
+                if($result){
+                  while ($row = mysql_fetch_array($result)) {
+                    $pics = $row['7'];
+                  }
+                }
+
+                if(empty($pics)){
+                  echo "<img src='' alt='No image' style='float: left; max-width:150px; height:200px; padding-right:15px;'>";
+                }else{ 
+                  echo "<img src='".$pics."' style='float: right; margin-top:-40px; max-width:150px; height:200px; padding-right:15px;'>";
+                }
+              ?>
+        <form action="up-img.php?page=<?php echo $_GET['page'];?>" method="POST" enctype="multipart/form-data">
+          + Upload Logo:
+          <input type="file" name="fileToUpload" id="fileToUpload">
+          <input type="submit" value="Upload Image" name="upload" class="btn btn-default" style="color:whitesmoke; background-color: black; text-decoration: none; width: 100px;">
+        </form>
         <form action="edit_page.php?page=<?php 
                     echo urlencode($sel_page["id"]); 
                     ?>" method="POST">
