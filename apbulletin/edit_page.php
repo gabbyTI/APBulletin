@@ -92,6 +92,14 @@
                   return($result);
                 } 
 
+                function get_ad($public = true){
+                  global $connection;
+                  $sql = "SELECT * FROM adverts WHERE page = {$_GET['page']}";
+                  $result = mysql_query($sql);
+                  confirm_query($result);
+                  return($result);
+                }
+
                 $result = get_img();
                 if($result){
                   while ($row = mysql_fetch_array($result)) {
@@ -100,7 +108,7 @@
                 }
 
                 if(empty($pics)){
-                  echo "<img src='' alt='No image' style='float: left; max-width:150px; height:200px; padding-right:15px;'>";
+                  
                 }else{ 
                   echo "<img src='".$pics."' style='float: right; margin-top:-40px; max-width:150px; height:200px; padding-right:15px;'>";
                 }
@@ -127,6 +135,23 @@
         
         <a href="content.php">Cancel</a>
       </td>
+      <td>
+        <div style="border: 1px solid black; padding:5px; height:100%; width:250px; float:right; background-color:grey;">
+          <h3 style="padding-left:5px; border:none; border-left: 3px solid green; color: whitesmoke; margin-top:0px;">EDIT ADVERTS</h3>
+          <?php
+            $result_ad = get_ad();
+            if($result_ad){
+              while ($row = mysql_fetch_array($result_ad)){
+                echo "<hr><h3 style='border:none; border-left:3px solid green; padding:3px; margin-top:0px;'>".$row['2']."</h4>"; 
+                echo "<img src='".$row['4']."' style='float:left; margin-top:-12px; margin-right:10px; max-width:100px; height:100px;'>";
+                echo "<p style='text-align:justify;'>".$row['3']."</p>";
+              }
+            }
+          ?>
+            <hr>
+            <a href="edit_ad.php?page=<?php echo $_GET['page'];?>">Edit Ads</a>
+          <br>
+        </div>
     </tr>
   </table>
   

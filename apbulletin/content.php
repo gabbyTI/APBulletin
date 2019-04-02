@@ -51,7 +51,7 @@
             } 
           ?>
       </td>
-      <td id="page">
+      <td id="page" style="padding-right:15px;">
         <?php if(!is_null($sel_subject)) { // subject selected ?>
         <h2><?php echo htmlentities($sel_subject["menu_name"]) ;?></h2>
         <?php } elseif (!is_null($sel_page)) { // page selected ?>
@@ -66,8 +66,16 @@
                   $result = mysql_query($sql);
                   confirm_query($result);
                   return($result);
-                } 
+                }
 
+                function get_ad($public = true){
+                  global $connection;
+                  $sql = "SELECT * FROM adverts WHERE page = {$_GET['page']}";
+                  $result = mysql_query($sql);
+                  confirm_query($result);
+                  return($result);
+                }
+                
                 $result = get_img();
                 if($result){
                   while ($row = mysql_fetch_array($result)) {
@@ -76,7 +84,7 @@
                 }
 
                 if(empty($pics)){
-                  echo "<img src='' alt='No image' style='float: left; max-width:150px; height:200px; padding-right:15px;'>";
+                  
                 }else{ 
                   echo "<img src='".$pics."' style='float: left; max-width:150px; height:200px; padding-right:15px;'>";
                 }
@@ -93,6 +101,25 @@
        <?php } else{ // nothing was selected ?>
          <h2> Select a subject / page to edit </h2>
        <?php }?>
+      </td>
+      <td>
+        <div style="border: 1px solid black; padding:5px; height:100%; background-color:grey;">
+          <h3 style="padding-left:5px; border:none; border-left: 3px solid green; background-color: whitesmoke; margin-top:0px;">Advertisments/Announcement</h3>
+          <?php
+            if(isset($_GET['page'])){
+              $result_ad = get_ad();
+              if($result_ad){
+                while ($row = mysql_fetch_array($result_ad)){
+                  echo'
+                      <hr><h3 style="border:none; border-left:3px solid green; padding:3px; margin-top:0px;">'.$row['2'].'</h4>
+                      <img src="'.$row['4'].'"style="float:left; margin-top:-12px; margin-right:10px; max-width:100px; height:100px;">
+                      <p style="text-align:justify;">'.$row['3'].'</p>
+                    ';
+                }
+              }
+            }
+          ?>
+          </div>
       </td>
     </tr>
   </table>
