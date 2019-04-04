@@ -82,6 +82,42 @@
         // Using function to list he fields that had errore
         if (!empty($errors)) { display_errors($errors); }
         ?>
+        <?php 
+                //echo strip_tags(nl2br($sel_page["content"]), "<b><br><p><a><hr><i><u><h1><h2><h3><h4><h5><h6><center>");
+                function get_img($public = true){
+                  global $connection;
+                  $sql = "SELECT * FROM pages WHERE id = {$_GET['page']}";
+                  $result = mysql_query($sql);
+                  confirm_query($result);
+                  return($result);
+                } 
+
+                function get_ad($public = true){
+                  global $connection;
+                  $sql = "SELECT * FROM adverts WHERE page = {$_GET['page']}";
+                  $result = mysql_query($sql);
+                  confirm_query($result);
+                  return($result);
+                }
+
+                $result = get_img();
+                if($result){
+                  while ($row = mysql_fetch_array($result)) {
+                    $pics = $row['7'];
+                  }
+                }
+
+                if(empty($pics)){
+                  
+                }else{ 
+                  echo "<img src='".$pics."' style='float: right; margin-top:-40px; max-width:150px; height:200px; padding-right:15px;'>";
+                }
+              ?>
+        <form action="up-img.php?page=<?php echo $_GET['page'];?>" method="POST" enctype="multipart/form-data">
+          + Upload Logo:
+          <input type="file" name="fileToUpload" id="fileToUpload">
+          <input type="submit" value="Upload Image" name="upload" class="btn btn-default" style="color:whitesmoke; background-color: black; text-decoration: none; width: 100px;">
+        </form>
         <form action="edit_page.php?page=<?php 
                     echo urlencode($sel_page["id"]); 
                     ?>" method="POST">
@@ -99,6 +135,23 @@
         
         <a href="content.php">Cancel</a>
       </td>
+      <td>
+        <div style="border: 1px solid black; padding:5px; height:100%; width:250px; float:right; background-color:grey;">
+          <h3 style="padding-left:5px; border:none; border-left: 3px solid green; color: whitesmoke; margin-top:0px;">EDIT ADVERTS</h3>
+          <?php
+            $result_ad = get_ad();
+            if($result_ad){
+              while ($row = mysql_fetch_array($result_ad)){
+                echo "<hr><h3 style='border:none; border-left:3px solid green; padding:3px; margin-top:0px;'>".$row['2']."</h4>"; 
+                echo "<img src='".$row['4']."' style='float:left; margin-top:-12px; margin-right:10px; max-width:100px; height:100px;'>";
+                echo "<p style='text-align:justify;'>".$row['3']."</p>";
+              }
+            }
+          ?>
+            <hr>
+            <a href="edit_ad.php?page=<?php echo $_GET['page'];?>">Edit Ads</a>
+          <br>
+        </div>
     </tr>
   </table>
   
