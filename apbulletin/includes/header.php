@@ -20,7 +20,23 @@
         if(empty($pics)){
           echo "<h1>KK Motins</h1>";
         }else{
-          echo '<img src="includes/'.$pics.'" style="border-radius:10px; margin-left: 50px; margin-top: 5px; width:60px; height:60px;" alt="user-profile-picture"/>';
+          echo '
+          <table id="structure">
+            <tr>
+              <td>
+                <a href="index.php"><img src="includes/'.$pics.'" style="border-radius:10px; margin-left: 50px; margin-top: 5px; width:60px; height:60px;" alt="user-profile-picture"/></a>
+              </td>
+              <td>
+                <h1><a href="index.php" style="text-decoration:none; color:whitesmoke; font-size:17px;">Home</a></h1>
+              </td>
+              <td>
+                <h1>Pilgrimage Center Elele</h1>
+              </td>
+              <td>
+                <h1>'.date("F Y").'</h1>
+              </td>
+            </tr>
+          </table>';
         }
       ?>
       <!--<img src="logos/Chib Sch 20170915_225715.jpg" style="width:100px; height:100px;" alt="user-profile-picture"/>-->

@@ -58,7 +58,14 @@
        <?php }?>
       </td>
       <td>
-        <div style="border: 1px solid black; padding:5px; height:100%; background-color:grey;">
+        <?php
+          if(isset($_GET['page']) || isset($_GET['subj'])){
+            $visible = 'block';
+          }else{
+            $visible = 'none';
+          }
+        ?>
+        <div style="border: 1px solid black; padding:5px; display:<?php echo $visible;?>; height:100%; background-color:grey;">
           <h3 style="padding-left:5px; border:none; border-left: 3px solid green; background-color: whitesmoke; margin-top:0px;">Advertisments/Announcement</h3>
           <?php
             if(isset($_GET['page'])){
