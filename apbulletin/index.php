@@ -12,7 +12,7 @@
       <td id="navigation">
         <?php echo public_navigation($sel_subject, $sel_page) ;  ?>
       </td>
-      <td id="page" style="padding-right:20px;">
+      <td id="page" style="">
         <?php if($sel_page) { ?>
         <h2><?php echo htmlentities($sel_page["menu_name"]);?></h2>
         <div class = "page-content">
@@ -54,10 +54,78 @@
         ?>
         </div>
         <?php } else{ ?>
-         <h2> Welcome to A. A. Mortins</h2>
+		 <!-- sl-slider Container -->
+		<div class="demo-2" style="width:100%">
+        <!-- sl-slider wrapper -->
+        <div id="slider" class="sl-slider-wrapper" style="width:100%">
+            <!-- sl-slider  -->
+            <div class="sl-slider">
+
+                <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+                    <div class="sl-slide-inner">
+                        <div class="bg-img bg-img-1"></div>
+                        <h2>Salvation is important.</h2>
+                        <blockquote>
+                            <p>Don't Be Left Out.</p>
+                        </blockquote>
+                    </div>
+                </div>
+
+                <div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
+                    <div class="sl-slide-inner">
+                        <div class="bg-img bg-img-2"></div>
+                        <h2>Be proud of Christianity 100%</h2>
+                        <blockquote>
+                            <p>confidence in the Lord.</p>
+                        </blockquote>
+                    </div>
+                </div>
+
+                <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+                    <div class="sl-slide-inner">
+                        <div class="bg-img bg-img-3"></div>
+                        <h2>Anthoopadua Bulletin</h2>
+                        <blockquote>
+                            <p>Giving the best Services</p>
+                        </blockquote>
+                    </div>
+                </div>
+
+                <div class="sl-slide" data-orientation="vertical" data-slice1-rotation="-5" data-slice2-rotation="25" data-slice1-scale="2" data-slice2-scale="1">
+                    <div class="sl-slide-inner">
+                        <div class="bg-img bg-img-4"></div>
+                        <h2>Guaranteed premium services</h2>
+                        <blockquote>
+                            <p>Online Catholic bulletines and magazines</p>
+                        </blockquote>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /sl-slider -->
+
+            <!-- sl-slider Nav -->
+            <nav id="nav-arrows" class="nav-arrows">
+                <span class="nav-arrow-prev">Previous</span>
+                <span class="nav-arrow-next">Next</span>
+            </nav>
+            <nav id="nav-dots" class="nav-dots">
+                <span class="nav-dot-current"></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </nav>
+            <!-- /sl-slider Nav -->
+        </div>
+        <!-- /sl-slider Wrapper -->
+    </div>
+    <!-- /sl-slider Container -->
+
+    <!-- <h2> Welcome to A. A. Mortins</h2> -->
        <?php }?>
       </td>
-      <td>
+      <td id="navigation">
         <?php
           if(isset($_GET['page']) || isset($_GET['subj'])){
             $visible = 'block';
@@ -86,3 +154,5 @@
     </tr>
   </table>
 <?php require("includes/footer.php");?>
+<script type="text/javascript" src="assets/slslider/js/jquery.ba-cond.min.js"></script>
+<script type="text/javascript" src="assets/slslider/js/jquery.slitslider.js"></script>
