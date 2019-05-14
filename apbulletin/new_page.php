@@ -28,7 +28,7 @@
           <input type="submit" value="Create Page" />
         </form>
         
-        </br/>
+        <br/>
         <a href="content.php">Cancel</a>
       </td>
     </tr>
